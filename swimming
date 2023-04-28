@@ -1,0 +1,28 @@
+class Swimming(Training):
+    """Тренировка: плавание."""
+    SWIMMING_1 = 1.1
+    SWIMMING_2 = 2
+    LEN_STEP = 1.38
+
+    def __init__(self,
+                 action: int,
+                 duration: float,
+                 weight: float,
+                 length_pool: int,
+                 count_pool: int) -> None:
+        super().__init__(action, duration, weight)
+        self.length_pool = length_pool
+        self.count_pool = count_pool
+
+    def get_mean_speed(self) -> float:
+        """Вычисление средней скорости при плавании."""
+        speed_1 = self.length_pool * self.count_pool
+        speed = speed_1 / self.M_IN_KM / self.duration
+        return speed
+
+    def get_spent_calories(self) -> float:
+        """Количество затраченных каллорий при плавании."""
+        calories_1 = self.get_mean_speed() + self.SWIMMING_1
+        calories_2 = calories_1 * self.SWIMMING_2 * self.weight
+        calories = calories_2 * self.duration
+        return calories
